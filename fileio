@@ -1,0 +1,50 @@
+#!/bin/sh
+
+OPT=$1
+FILE_NAME=$2
+eval LAST=\${$#}
+THRID=$3
+N="\033[0m"    # Reset
+B="\033[1m"    # Bold
+R="\033[1;31m" # Red
+G="\033[1;32m" # Green
+Y="\033[1;33m" # Yellow
+M="\033[1;35m" # Magenta
+C="\033[1;36m" # Cyan
+
+help_text(){
+	printf "Usage:\n"
+	printf "   -h          Shows the help menu and exits\n"
+	printf "   -f          Specify the path of the file\n"
+	printf "   Example:    fileio -f foo.txt 3d\n"
+    printf "   The last argument is the expiry date it can be either d,w,m,y d-days w-weeks m-months y-years.The default value is 1d\n"
+}
+
+
+check(){
+	[ -e "$2" ] &
+}
+
+checkvar(){
+    [ -z "$THRID" ]
+}
+
+upload(){
+    [ -z "$THRID" ] && curl -X POST "https://file.io/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data" -F "expires=1d" -F "file=@${FILE_NAME}" ||
+	curl -X POST "https://file.io/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data" -F "expires=${LAST}" -F "file=@${FILE_NAME}"
+}
+
+case "$OPT" in
+	-h) help_text
+		;;
+	--help) help_text
+		;;
+	-help) help_text
+		;;
+	-f) check && upload
+		;;
+	*) printf "Invalid option\n" && help_text
+		;;
+esac
+
+#curl -F "file=@${FILE_NAME}" https://file.io/?expires=${DATE}
