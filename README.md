@@ -4,20 +4,34 @@ Stores files on the cloud for a specific time using file.io
 
 ## Installing
 
-> git clone https://github.com/unixchad/filestore.git
+```shell
+git clone https://github.com/unixchad/filestore.git
+```
 
-> cd filestore
+```shell
+cd filestore
+```
 
-> sudo make install
+```shell
+sudo make install
+```
 
 ## Using the program
 
-> fileio -h
+```shell
+fileio -h
+```
 
-> fileio -f foo.txt 1d
+```shell
+fileio -f foo.txt 1d
+```
 
 ## Uninstalling
 
-> cd filestore
+```shell
+cd filestore
+```
 
-> sudo make uninstall
+```shell
+sudo make uninstall
+```
