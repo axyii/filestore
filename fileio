@@ -25,10 +25,6 @@ check(){
 	[ -e "$2" ] &
 }
 
-checkvar(){
-    [ -z "$THRID" ]
-}
-
 upload(){
     [ -z "$THRID" ] && curl -X POST "https://file.io/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data" -F "expires=1d" -F "file=@${FILE_NAME}" ||
 	curl -X POST "https://file.io/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data" -F "expires=${LAST}" -F "file=@${FILE_NAME}"
@@ -46,5 +42,3 @@ case "$OPT" in
 	*) printf "Invalid option\n" && help_text
 		;;
 esac
-
-#curl -F "file=@${FILE_NAME}" https://file.io/?expires=${DATE}
