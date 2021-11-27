@@ -4,7 +4,6 @@ OPT=$1
 FILE_NAME=$2
 eval LAST=\${$#}
 THRID=$3
-N="\033[0m"    # Reset
 B="\033[1m"    # Bold
 R="\033[1;31m" # Red
 G="\033[1;32m" # Green
@@ -13,7 +12,7 @@ M="\033[1;35m" # Magenta
 C="\033[1;36m" # Cyan
 
 help_text(){
-	printf "Usage:\n"
+	printf "${C}Usage:\n"
 	printf "   -h          Shows the help menu and exits\n"
 	printf "   -f          Specify the path of the file\n"
 	printf "   Example:    fileio -f foo.txt 3d\n"
@@ -39,6 +38,6 @@ case "$OPT" in
 		;;
 	-f) check && upload
 		;;
-	*) printf "Invalid option\n" && help_text
+	*) printf "${R}${B}Invalid option\n" && help_text
 		;;
 esac
